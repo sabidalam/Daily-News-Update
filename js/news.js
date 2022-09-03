@@ -44,7 +44,7 @@ const displayNews = allNews => {
           <div class="col-md-8">  
             <div class="card-body p-5">
                 <h5 class="card-title">${news.title}</h5>
-                <p class="card-text">${news.details.slice(0, 700)}....</p>
+                <p class="card-text">${news.details.slice(0, 400)}....</p>
             </div>
             <div class="d-flex justify-content-around">
               <div>
@@ -54,8 +54,8 @@ const displayNews = allNews => {
               <p class="mt-3"><i class="fa-solid fa-eye"></i> ${news.total_view ? news.total_view : 'No views found'}</p>
               <p class="mt-3">rating: ${news.rating.number ? news.rating.number : 'No rating found'} <span><i class="fa-solid fa-star-half-stroke"></i></span></p>
               <div class="mt-1">
-              <button type="button" id="details-btn" class="btn btn-primary px-2"
-                onclick="">Show Detail</button>
+              <button type="button" id="news-details-btn" class="btn btn-primary px-2"
+                onclick="loadNewsDetails('${news._id}')" data-bs-toggle="modal" data-bs-target="#newsdetailsModal">Show Detail</button>
                 </div>
             </div>
           </div>   
@@ -65,20 +65,47 @@ const displayNews = allNews => {
         newsContainer.appendChild(newsDiv);
 
     });
-
+    // no news found
     const noNewsFound = document.getElementById('no-news-found');
     if (allNews.length === 0) {
         noNewsFound.classList.remove('d-none');
     } else {
         noNewsFound.classList.add('d-none');
     }
-
+    // news list 
     const newsList = document.getElementById('news-list');
     if (allNews.length !== 0) {
-        newsList.value = allNews.length + ' items found for this Category';
+        newsList.value = (allNews.length + ' items found for this Category');
     } else {
         newsList.value = 'No items found';
     }
+
+}
+
+const loadNewsDetails = id => {
+    const url = `https://openapi.programming-hero.com/api/news/${id}`;
+    fetch(url)
+        .then(res => res.json())
+        .then(data => displayNewsDetails(data.data[0]))
+
+}
+
+const displayNewsDetails = news => {
+    console.log(news);
+    const modalTitle = document.getElementById('newsdetailsModalLabel');
+    modalTitle.innerText = news.title;
+    const newsDetalis = document.getElementById('news-Details');
+    newsDetalis.innerHTML = `
+        <div class="d-flex justify-content-between">
+        <p class="fw-semibold">Author: ${news.author.name ? news.author.name : 'No auther name found'}</p>
+        <p class="fw-semibold">Published Date: ${news.author.published_date ? news.author.published_date : 'Published date not found'}</p>
+        <p class="fw-semibold">Views:  ${news.total_view ? news.total_view : 'No views found'}</p>
+        </div>
+        <p>Detail: ${news.details}</p>
+        <img src="${news.thumbnail_url}" class="card-img-top img-fluid" alt="">
+    `;
+
+
 
 }
 

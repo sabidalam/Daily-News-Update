@@ -47,7 +47,7 @@
         </section>
         <section class="container">
             <div>
-                <input type="text" class="form-control py-2" id="news-list" placeholder="">
+                <input type="text" class="form-control py-2 fw-semibold" id="news-list" placeholder="">
             </div>
             <div class="py-5 d-flex justify-content-between">
                 <div>
@@ -65,7 +65,28 @@
             <div id="no-news-found" class="d-none">
                 <h2 class="text-4xl font-bold text-center">No Update Available!</h2>
             </div>
+            <!-- Modal -->
+            <div class="modal fade" id="newsdetailsModal" tabindex="-1" aria-labelledby="newsdetailsModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h6 class="modal-title" id="newsdetailsModalLabel">Modal title</h6>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div id="news-Details" class="modal-body">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         </section>
+
 
     </main>
 
