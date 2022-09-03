@@ -39,7 +39,7 @@ const displayNews = allNews => {
     const sort = allNews.sort((a, b) => b.total_view - a.total_view);
     const newsContainer = document.getElementById('news-container');
     newsContainer.innerHTML = ``;
-    allNews.forEach(news => {
+    sort.forEach(news => {
         const newsDiv = document.createElement('div');
         newsDiv.classList.add('col');
         newsDiv.innerHTML = `
@@ -93,7 +93,6 @@ const displayNews = allNews => {
         newsList.value = 'No items found';
     }
 
-
 }
 
 const taggleSpinner = isLoading => {
@@ -132,6 +131,5 @@ const displayNewsDetails = news => {
     `;
 
 }
-
 
 loadCategory();
