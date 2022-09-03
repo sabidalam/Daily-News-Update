@@ -3,11 +3,13 @@ const loadCategory = () => {
     fetch(url)
         .then(res => res.json())
         .then(data => displayCategory(data.data.news_category))
+        .catch((error) => {
+            console.log('There is an error', error)
+        });
 }
 
 
 const displayCategory = (categories) => {
-    console.log(categories);
     const displayCategory = document.getElementById('displayCategory');
     categories.forEach(category => {
         const li = document.createElement('li');
@@ -25,12 +27,16 @@ const loadNews = (id) => {
     const url = ` https://openapi.programming-hero.com/api/news/category/${id}`;
     fetch(url)
         .then(res => res.json())
-        .then(data => displayNews(data.data));
+        .then(data => displayNews(data.data))
+        .catch((error) => {
+            console.log('There is an error', error)
+        });
 
 }
 
 const displayNews = allNews => {
     console.log(allNews);
+    const sort = allNews.sort((a, b) => b.total_view - a.total_view);
     const newsContainer = document.getElementById('news-container');
     newsContainer.innerHTML = ``;
     allNews.forEach(news => {
@@ -48,15 +54,20 @@ const displayNews = allNews => {
                 <p class="card-text">${news.details.slice(0, 400)}....</p>
             </div>
             <div class="d-flex justify-content-around">
-              <div>
-              <p class="card-text mb-0 fw-semibold">${news.author.name ? news.author.name : 'No auther name found'}</p>
-              <span>${news.author.published_date ? news.author.published_date : 'Published date not found'}</span>
+              <div class="d-flex">
+                <div>
+                  <img src="${news.author.img ? news.author.img : 'No image found'}" class="card-img-top img-fluid rounded-circle me-3" alt="" style="height: 50px; width:50px;">
+                </div>
+                <div>
+                <p class="card-text mb-0 fw-semibold">${news.author.name ? news.author.name : 'No auther name found'}</p>
+                <span>${news.author.published_date ? news.author.published_date : 'Published date not found'}</span>
+                </div>
               </div>
               <p class="mt-3"><i class="fa-solid fa-eye"></i> ${news.total_view ? news.total_view : 'No views found'}</p>
               <p class="mt-3">rating: ${news.rating.number ? news.rating.number : 'No rating found'} <span><i class="fa-solid fa-star-half-stroke"></i></span></p>
               <div class="mt-1">
               <button type="button" id="news-details-btn" class="btn btn-primary px-2"
-                onclick="loadNewsDetails('${news._id}')" data-bs-toggle="modal" data-bs-target="#newsdetailsModal">Show Detail</button>
+                onclick="loadNewsDetails('${news._id}')" data-bs-toggle="modal" data-bs-target="#newsdetailsModal">Details</button>
                 </div>
             </div>
           </div>   
@@ -66,7 +77,6 @@ const displayNews = allNews => {
         newsContainer.appendChild(newsDiv);
 
     });
-    taggleSpinner(false);
     // no news found
     const noNewsFound = document.getElementById('no-news-found');
     if (allNews.length === 0) {
@@ -74,6 +84,7 @@ const displayNews = allNews => {
     } else {
         noNewsFound.classList.add('d-none');
     }
+    taggleSpinner(false);
     // news list 
     const newsList = document.getElementById('news-list');
     if (allNews.length !== 0) {
@@ -81,6 +92,7 @@ const displayNews = allNews => {
     } else {
         newsList.value = 'No items found';
     }
+
 
 }
 
@@ -98,6 +110,9 @@ const loadNewsDetails = id => {
     fetch(url)
         .then(res => res.json())
         .then(data => displayNewsDetails(data.data[0]))
+        .catch((error) => {
+            console.log('There is an error', error)
+        });
 
 }
 
@@ -116,12 +131,7 @@ const displayNewsDetails = news => {
         <img src="${news.thumbnail_url}" class="card-img-top img-fluid" alt="">
     `;
 
-
-
 }
-
-
-
 
 
 loadCategory();
