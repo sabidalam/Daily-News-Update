@@ -66,6 +66,20 @@ const displayNews = allNews => {
 
     });
 
+    const noNewsFound = document.getElementById('no-news-found');
+    if (allNews.length === 0) {
+        noNewsFound.classList.remove('d-none');
+    } else {
+        noNewsFound.classList.add('d-none');
+    }
+
+    const newsList = document.getElementById('news-list');
+    if (allNews.length !== 0) {
+        newsList.value = allNews.length + ' items found for this Category';
+    } else {
+        newsList.value = 'No items found';
+    }
+
 }
 
 
