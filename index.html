@@ -8,11 +8,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/55421af7af.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg bg-light py-3">
+        <nav class="navbar navbar-expand-lg bg-info py-3">
             <div class="container">
                 <a class="navbar-brand" href="#">Daily <span
                         class="text-white bg-primary rounded px-2 py-1">Update</span></a>
@@ -37,26 +38,32 @@
         </nav>
     </header>
     <main>
-        <section>
-            <div class="container">
+        <section class="container">
+            <div>
                 <ul id="displayCategory" class="nav ul py-4">
 
                 </ul>
             </div>
         </section>
+        <section class="container">
+            <div>
+                <input type="text" class="form-control py-2" id="" placeholder="">
+            </div>
+            <div class="py-5 d-flex justify-content-between">
+                <div>
+                    <p class="mt-1"><span class="fw-semibold">Sort By View:</span> <input type="text"> </p>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-outline-primary">Today's Update</button>
+                    <button type="button" class="btn btn-outline-primary">Trending</button>
+                </div>
+            </div>
+        </section>
+        <section class="container">
+            <div class="row row-cols-1 row-cols-md-1 g-4" id="news-container">
+            </div>
+        </section>
     </main>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

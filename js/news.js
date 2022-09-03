@@ -12,11 +12,26 @@ const displayCategory = (categories) => {
     categories.forEach(category => {
         const li = document.createElement('li');
         li.innerHTML = `
-          <a class="nav-link ps-4 fw-semibold" href="#">${category.category_name}</a>
+          <a class="nav-link fw-semibold btn" href="#" onclick ="loadNews('${category.category_id}')">${category.category_name}</a>
         `;
         displayCategory.appendChild(li);
 
     });
 }
+
+
+const loadNews = (id) => {
+    const url = ` https://openapi.programming-hero.com/api/news/category/${id}`;
+    fetch(url)
+        .then(res => res.json())
+        .then(data => displayNews(data.data));
+
+}
+
+
+
+
+
+
 
 loadCategory();
