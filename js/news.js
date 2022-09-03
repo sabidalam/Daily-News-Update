@@ -63,10 +63,10 @@ const displayNews = allNews => {
                 <span>${news.author.published_date ? news.author.published_date : 'Published date not found'}</span>
                 </div>
               </div>
-              <p class="mt-3"><i class="fa-solid fa-eye"></i> ${news.total_view ? news.total_view : 'No views found'}</p>
+              <p class="mt-3 me-3"><i class="fa-solid fa-eye"></i> ${news.total_view ? news.total_view : 'No views found'}</p>
               <p class="mt-3">rating: ${news.rating.number ? news.rating.number : 'No rating found'} <span><i class="fa-solid fa-star-half-stroke"></i></span></p>
               <div class="mt-1">
-              <button type="button" id="news-details-btn" class="btn btn-primary px-2"
+              <button type="button" id="news-details-btn" class="btn btn-primary px-2 mt-1"
                 onclick="loadNewsDetails('${news._id}')" data-bs-toggle="modal" data-bs-target="#newsdetailsModal">Details</button>
                 </div>
             </div>
